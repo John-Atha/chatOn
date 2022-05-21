@@ -2,7 +2,7 @@ const User = require("../models/User");
 const express = require("express");
 const JsonWebToken = require("jsonwebtoken");
 const Bcrypt = require("bcryptjs");
-const getRequestUser = require("./helpers");
+const getRequestUser = require("../helpers/getRequestUser");
 
 const getTokenPayload = (user) => {
   return {
@@ -88,6 +88,7 @@ router.get("/:username", async (req, res) => {
     res.status(404).send(`User '${username}' does not exist`);
     return;
   }
+  console.log({ datetime: user._id.getTimestamp().getFullYear() })
   res.send(user);
 });
 

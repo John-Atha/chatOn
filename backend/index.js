@@ -15,7 +15,9 @@ const server = http.createServer(app);
 app.use(BodyParser.json());
 
 const usersRoutes = require("./controllers/users");
+const messagesRoutes = require("./controllers/messages");
 app.use("/users", usersRoutes);
+app.use("/messages", messagesRoutes);
 
 app.get('/', (req, res) => {
     console.log("hey")
