@@ -120,6 +120,13 @@ router.post("/", async (req, res) => {
     datetime: new Date(),
   })
     .then((msg) => {
+      req.app
+        .get("socketService")
+        .group_emitter(
+          "new_message",
+          receiverUser._id,
+          `New message from user ${requestUser.username}`
+        );
       res.send(msg);
     })
     .catch((error) => {
