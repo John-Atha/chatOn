@@ -125,7 +125,7 @@ router.post("/", async (req, res) => {
         .group_emitter(
           "new_message",
           receiverUser._id,
-          `New message from user ${requestUser.username}`
+          msg,
         );
       res.send(msg);
     })

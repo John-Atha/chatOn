@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { checkLoggedCall } from "../../api/auth";
 import { RootState } from "../store";
 
@@ -24,6 +24,11 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    login: (state: AuthState, action: PayloadAction<any>) => {
+      const { token, user } = action.payload;
+      localStorage.setItem('token', token);
+      state.user = user;
+    },
     logout: (state: AuthState) => {
       state.user = null;
     },
@@ -31,15 +36,15 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(checkLogged.pending, (state) => {
       state.status = "loading";
-    }),
-      builder.addCase(checkLogged.fulfilled, (state, action) => {
-        state.status = "idle";
-        const user = action.payload;
-        state.user = user;
-      });
+    });
+    builder.addCase(checkLogged.fulfilled, (state, action) => {
+      state.status = "idle";
+      const user = action.payload;
+      state.user = user;
+    });
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 export const selectAuth = (state: RootState) => state.auth;
 export default authSlice.reducer;

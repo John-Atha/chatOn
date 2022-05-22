@@ -43,7 +43,8 @@ router.post("/signup", async (req, res) => {
         getTokenPayload(user),
         process.env.SECRET_KEY
       );
-      res.json({ token });
+      const {password, ...userFields} = user._doc;
+      res.json({ token, user: userFields });
     })
     .catch((error) => {
       res.status(400).json({ error });
@@ -65,7 +66,8 @@ router.post("/login", async (req, res) => {
       getTokenPayload(user),
       process.env.SECRET_KEY
     );
-    res.json({ token });
+    const {password, ...userFields} = user._doc;
+    res.json({ token, user: userFields });
   }
 });
 
@@ -88,7 +90,6 @@ router.get("/:username", async (req, res) => {
     res.status(404).send(`User '${username}' does not exist`);
     return;
   }
-  console.log({ datetime: user._id.getTimestamp().getFullYear() })
   res.send(user);
 });
 
