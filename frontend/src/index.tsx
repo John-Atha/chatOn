@@ -4,7 +4,7 @@ import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import App from "./App";
+import App from "./pages/App";
 import { LoginRegister } from "./pages/LoginRegister";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";

@@ -3,7 +3,7 @@ import axios from "axios";
 export const buildAuthHeader = () => {
   const token = localStorage.getItem("token");
   const header = {
-    Authorization: `token ${token}`,
+    Authorization: `Bearer ${token}`,
   };
   return header;
 };

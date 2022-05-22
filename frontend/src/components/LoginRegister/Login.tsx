@@ -2,27 +2,19 @@ import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { signUpCall } from "../api/auth";
-import { getFieldErrors } from "../helpers/getFieldErrors";
-import { SignUpValidationSchema } from "../helpers/yup/SignValidationSchema";
-import { useAppDispatch } from "../redux/hooks";
+import { getFieldErrors } from "../../helpers/getFieldErrors";
+import { LoginValidationSchema } from "../../helpers/yup/SignValidationSchema";
 
-export const Signup = ({ submit }: { submit: (values: any) => void }) => {
-  const dispatch = useAppDispatch();
+export const Login = ({ submit }: { submit: (values: any) => void }) => {
 
   return (
     <Stack spacing={2} justifyContent={"center"}>
       <Typography align="center" variant="h5">
-        Sign up
+        Login
       </Typography>
       <Formik
-        initialValues={{
-          username: "",
-          password: "",
-          email: "",
-          confirmation: "",
-        }}
-        validationSchema={SignUpValidationSchema}
+        initialValues={{ username: "", password: "" }}
+        validationSchema={LoginValidationSchema}
         onSubmit={submit}
       >
         {({ values, errors, touched }) => (
@@ -40,29 +32,11 @@ export const Signup = ({ submit }: { submit: (values: any) => void }) => {
               <Field
                 as={TextField}
                 variant="outlined"
-                label="Email"
-                placeholder="Email..."
-                name="email"
-                type="text"
-                {...getFieldErrors({ name: "email", errors, touched })}
-              />
-              <Field
-                as={TextField}
-                variant="outlined"
                 label="Password"
                 placeholder="password..."
                 name="password"
                 type="password"
                 {...getFieldErrors({ name: "password", errors, touched })}
-              />
-              <Field
-                as={TextField}
-                variant="outlined"
-                label="Confirmation"
-                placeholder="confirmation..."
-                name="confirmation"
-                type="password"
-                {...getFieldErrors({ name: "confirmation", errors, touched })}
               />
               <div style={{ paddingLeft: 32, paddingRight: 32 }}>
                 <Button
@@ -71,11 +45,11 @@ export const Signup = ({ submit }: { submit: (values: any) => void }) => {
                   size="large"
                   fullWidth
                 >
-                  Signup
+                  Login
                 </Button>
               </div>
-              <NavLink style={{ textAlign: "center" }} to="/login">
-                Already have an account?
+              <NavLink style={{ textAlign: "center" }} to="/signup">
+                First time here?
               </NavLink>
             </Stack>
           </Form>
